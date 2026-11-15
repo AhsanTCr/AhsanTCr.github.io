@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f8f8f5">
+
+  <title>SheildLenz — A Smarter Layer of Protection</title>
+
+  <meta name="description" content="SheildLenz is an open-source Android content blocker powered by offline AI, designed to help create a safer digital experience.">
+
+  <meta name="keywords" content="SheildLenz, Android content blocker, offline AI, open source Android security, content protection">
+
+  <meta property="og:title" content="SheildLenz — A Smarter Layer of Protection">
+  <meta property="og:description" content="An open-source Android content blocker powered by offline AI.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ahsantcr.github.io/">
+
+  <link rel="canonical" href="https://ahsantcr.github.io/">
+
+  <style>
+    :root {
+      --bg: #f8f8f5;
+      --surface: #ffffff;
+      --text: #171916;
+      --muted: #73776f;
+      --line: #e7e8e2;
+      --green: #315e49;
+      --green-light: #eaf0eb;
+      --max: 1160px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 48px));
+      margin: auto;
+    }
+
+    header {
+      height: 76px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      background: rgba(248, 248, 245, 0.94);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 20px;
+      font-weight: 750;
+      letter-spacing: -0.8px;
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      background: var(--green);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      color: #555a52;
+      font-size: 13px;
+      font-weight: 550;
+    }
+
+    .nav-links a:hover {
+      color: var(--green);
+    }
+
+    .nav-cta {
+      border: 1px solid #d8ddd7;
+      padding: 10px 17px;
+      border-radius: 6px;
+      color: var(--text);
+      transition: .2s;
+    }
+
+    .nav-cta:hover {
+      background: var(--green);
+      border-color: var(--green);
+      color: white;
+    }
+
+    .hero {
+      padding: 112px 0 105px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      align-items: center;
+      gap: 70px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: 1.7px;
+      text-transform: uppercase;
+      margin-bottom: 26px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 22px;
+      height: 1px;
+      background: var(--green);
+    }
+
+    h1 {
+      font-size: clamp(43px, 6vw, 72px);
+      line-height: 1.04;
+      letter-spacing: -4px;
+      font-weight: 700;
+      max-width: 690px;
+    }
+
+    h1 span {
+      color: var(--green);
+    }
+
+    .hero-description {
+      max-width: 510px;
+      margin-top: 27px;
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 13px;
+      margin-top: 36px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 49px;
+      padding: 0 22px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 650;
+      transition: .2s;
+    }
+
+    .button-primary {
+      background: var(--green);
+      color: white;
+    }
+
+    .button-primary:hover {
+      background: #244936;
+      transform: translateY(-2px);
+    }
+
+    .button-secondary {
+      border: 1px solid #d9ddd6;
+      background: transparent;
+    }
+
+    .button-secondary:hover {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    .hero-note {
+      margin-top: 25px;
+      color: #8b8e87;
+      font-size: 12px;
+    }
+
+    .visual {
+      background: #edf0e9;
+      border: 1px solid #e0e5dc;
+      border-radius: 12px;
+      padding: 32px;
+      min-height: 370px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-card {
+      width: 100%;
+      max-width: 330px;
+      background: white;
+      border: 1px solid #e7e9e4;
+      border-radius: 10px;
+      padding: 25px;
+      box-shadow: 0 15px 45px rgba(28, 42, 30, .06);
+    }
+
+    .product-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .product-name {
+      font-size: 15px;
+      font-weight: 750;
+    }
+
+    .status {
+      font-size: 10px;
+      color: var(--green);
+      background: var(--green-light);
+      padding: 5px 9px;
+      border-radius: 20px;
+      font-weight: 700;
+    }
+
+    .shield {
+      width: 74px;
+      height: 74px;
+      margin: 30px auto 20px;
+      background: var(--green-light);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--green);
+      font-size: 34px;
+    }
+
+    .visual-title {
+      text-align: center;
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -.5px;
+    }
+
+    .visual-subtitle {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+
+    .visual-divider {
+      height: 1px;
+      background: var(--line);
+      margin: 24px 0 17px;
+    }
+
+    .visual-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #646a61;
+      margin-top: 11px;
+    }
+
+    .visual-row strong {
+      color: var(--green);
+      font-weight: 650;
+    }
+
+    .intro-strip {
+      padding: 29px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .strip-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .strip-label {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .strip-items {
+      display: flex;
+      gap: 34px;
+      flex-wrap: wrap;
+      color: #454b43;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    section.content-section {
+      padding: 100px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-heading {
+      max-width: 650px;
+      margin-bottom: 48px;
+    }
+
+    .section-label {
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-size: 11px;
+      font-weight: 750;
+      margin-bottom: 15px;
+    }
+
+    h2 {
+      font-size: clamp(31px, 4vw, 46px);
+      letter-spacing: -2px;
+      line-height: 1.15;
+      font-weight: 700;
+    }
+
+    .section-description {
+      margin-top: 17px;
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 570px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .feature {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 29px;
+      min-height: 215px;
+      transition: .2s;
+    }
+
+    .feature:hover {
+      border-color: #cbd6cb;
+      transform: translateY(-3px);
+    }
+
+    .feature-number {
+      font-size: 11px;
+      color: var(--green);
+      font-weight: 750;
+      letter-spacing: 1px;
+    }
+
+    .feature h3 {
+      margin-top: 27px;
+      font-size: 18px;
+      letter-spacing: -.4px;
+    }
+
+    .feature p {
+      margin-top: 10px;
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .privacy {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .privacy-panel {
+      background: #eaf0eb;
+      border-radius: 9px;
+      padding: 42px;
+    }
+
+    .privacy-panel h3 {
+      font-size: 20px;
+      letter-spacing: -.6px;
+    }
+
+    .privacy-panel p {
+      color: #667167;
+      margin-top: 13px;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .privacy-list {
+      list-style: none;
+      margin-top: 28px;
+    }
+
+    .privacy-list li {
+      padding: 13px 0;
+      border-top: 1px solid #d7e0d8;
+      font-size: 13px;
+      color: #3c5142;
+    }
+
+    .privacy-list li::before {
+      content: "✓";
+      margin-right: 12px;
+      font-weight: 800;
+      color: var(--green);
+    }
+
+    .opensource {
+      background: #202a24;
+      color: #fff;
+      padding: 72px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 35px;
+    }
+
+    .opensource .section-label {
+      color: #a9c4ae;
+    }
+
+    .opensource h2 {
+      max-width: 590px;
+    }
+
+    .opensource p {
+      margin-top: 16px;
+      color: #c0c9c1;
+      font-size: 14px;
+      max-width: 560px;
+    }
+
+    .opensource .button {
+      background: #fff;
+      color: #202a24;
+      white-space: nowrap;
+    }
+
+    .opensource .button:hover {
+      background: #e9eee9;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 80px;
+    }
+
+    .about-copy {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .about-copy p + p {
+      margin-top: 17px;
+    }
+
+    footer {
+      padding: 38px 0;
+    }
+
+    .footer-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: #858980;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      font-size: 12px;
+      color: #5e655c;
+    }
+
+    .footer-links a:hover {
+      color: var(--green);
+    }
+
+    @media (max-width: 850px) {
+      .hero-grid,
+      .privacy,
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
+
+      .hero {
+        padding: 80px 0;
+      }
+
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .opensource {
+        padding: 45px;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: calc(100% - 36px);
+      }
+
+      header {
+        height: 67px;
+      }
+
+      .nav-links {
+        gap: 13px;
+        font-size: 11px;
+      }
+
+      .nav-links a:nth-child(1),
+      .nav-links a:nth-child(2) {
+        display: none;
+      }
+
+      .nav-cta {
+        padding: 8px 11px;
+      }
+
+      .hero {
+        padding: 67px 0;
+      }
+
+      h1 {
+        font-size: 47px;
+        letter-spacing: -2.8px;
+      }
+
+      .hero-description {
+        font-size: 15px;
+      }
+
+      .visual {
+        padding: 19px;
+        min-height: 340px;
+      }
+
+      section.content-section {
+        padding: 72px 0;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .feature {
+        min-height: auto;
+      }
+
+      .privacy-panel {
+        padding: 27px;
+      }
+
+      .opensource {
+        padding: 30px 24px;
+      }
+
+      .strip-items {
+        gap: 17px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#" class="brand">
+          <span class="brand-mark">S</span>
+          SheildLenz
+        </a>
+
+        <div class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#about">About</a>
+          <a class="nav-cta" href="https://github.com/Ahsanpcin/Sheild-Lenz" target="_blank" rel="noopener">
+            View on GitHub ↗
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow">Android · Open Source · Offline AI</div>
+            <h1>
+              A smarter layer of
+              <span>digital protection.</span>
+            </h1>
+
+            <p class="hero-description">
+              Meet SheildLenz — an open-source Android content blocker powered by offline AI, built to help create a more controlled and safer digital experience.
+            </p>
+
+            <div class="hero-actions">
+              <a class="button button-primary" href="https://github.com/Ahsanpcin/Sheild-Lenz" target="_blank" rel="noopener">
+                Explore the project ↗
+              </a>
+
+              <a class="button button-secondary" href="#features">
+                Discover features
+              </a>
+            </div>
+
+            <p class="hero-note">
+              Built with a focus on privacy, control and responsible technology.
+            </p>
+          </div>
+
+          <div class="visual">
+            <div class="product-card">
+              <div class="product-top">
+                <div class="product-name">SheildLenz</div>
+                <div class="status">Protection concept</div>
+              </div>
+
+              <div class="shield">⌑</div>
+
+              <div class="visual-title">Your digital space.</div>
+              <div class="visual-subtitle">More control over what you see.</div>
+
+              <div class="visual-divider"></div>
+
+              <div class="visual-row">
+                <span>Platform</span>
+                <strong>Android</strong>
+              </div>
+
+              <div class="visual-row">
+                <span>Technology</span>
+                <strong>Offline AI</strong>
+              </div>
+
+              <div class="visual-row">
+                <span>Project</span>
+                <strong>Open source</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="intro-strip">
+      <div class="container">
+        <div class="strip-content">
+          <span class="strip-label">Designed around three important principles</span>
+
+          <div class="strip-items">
+            <span>01 &nbsp; Privacy</span>
+            <span>02 &nbsp; Control</span>
+            <span>03 &nbsp; Protection</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="content-section" id="features">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-label">What it offers</div>
+          <h2>Technology with a purpose.</h2>
+          <p class="section-description">
+            SheildLenz is being built around practical tools that help users manage their digital environment.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <article class="feature">
+            <div class="feature-number">01 / AI TECHNOLOGY</div>
+            <h3>Offline AI</h3>
+            <p>
+              Designed to use on-device AI capabilities for content analysis without depending entirely on cloud-based processing.
+            </p>
+          </article>
+
+          <article class="feature">
+            <div class="feature-number">02 / CONTENT CONTROL</div>
+            <h3>Content Blocking</h3>
+            <p>
+              Helps restrict access to unwanted content and supports a more controlled Android experience.
+            </p>
+          </article>
+
+          <article class="feature">
+            <div class="feature-number">03 / USER CONTROL</div>
+            <h3>Guardian PIN</h3>
+            <p>
+              An additional control mechanism intended to help protect important app settings.
+            </p>
+          </article>
+
+          <article class="feature">
+            <div class="feature-number">04 / PROTECTION</div>
+            <h3>Parental Controls</h3>
+            <p>
+              Built with families and responsible device usage in mind, helping guardians manage digital access.
+            </p>
+          </article>
+
+          <article class="feature">
+            <div class="feature-number">05 / APP SECURITY</div>
+            <h3>Uninstall Protection</h3>
+            <p>
+              Includes protection-oriented controls intended to make unauthorized removal more difficult.
+            </p>
+          </article>
+
+          <article class="feature">
+            <div class="feature-number">06 / COMMUNITY</div>
+            <h3>Open Source</h3>
+            <p>
+              A project that welcomes transparency, technical feedback and contributions from the developer community.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="privacy">
+      <div class="container">
+        <div class="privacy">
+          <div>
+            <div class="section-label">Privacy matters</div>
+            <h2>Protection should respect privacy.</h2>
+            <p class="section-description">
+              SheildLenz is designed with offline AI as a central part of its approach. The goal is to make useful content protection possible while reducing reliance on external services.
+            </p>
+          </div>
+
+          <div class="privacy-panel">
+            <h3>A privacy-conscious approach.</h3>
+            <p>
+              The project focuses on on-device technology and user control. Actual data handling depends on the implementation in the released version.
+            </p>
+
+            <ul class="privacy-list">
+              <li>Offline AI-focused architecture</li>
+              <li>Android-first development</li>
+              <li>User-oriented protection controls</li>
+              <li>Open-source project transparency</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container">
+        <div class="opensource">
+          <div>
+            <div class="section-label">Built in the open</div>
+            <h2>Good technology grows through transparency.</h2>
+            <p>
+              Explore the source code, follow development, report issues or contribute ideas. SheildLenz is an open-source project built for the community.
+            </p>
+          </div>
+
+          <a class="button" href="https://github.com/Ahsanpcin/Sheild-Lenz" target="_blank" rel="noopener">
+            Visit GitHub repository ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div>
+            <div class="section-label">About the project</div>
+            <h2>Built with a simple idea.</h2>
+          </div>
+
+          <div class="about-copy">
+            <p>
+              SheildLenz is an Android-focused open-source project created to explore how offline AI and content-control technology can work together.
+            </p>
+
+            <p>
+              Its goal is to give users more control over their digital environment through practical protection tools and a privacy-conscious approach.
+            </p>
+
+            <p>
+              The project is developed by Ahsan and continues to evolve through development and community feedback.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <a href="#" class="brand">
+          <span class="brand-mark">S</span>
+          SheildLenz
+        </a>
+
+        <p class="footer-copy">
+          © <span id="year"></span> SheildLenz. An independent open-source project.
+        </p>
+
+        <div class="footer-links">
+          <a href="#features">Features</a>
+          <a href="#privacy">Privacy</a>
+          <a href="https://github.com/Ahsanpcin/Sheild-Lenz" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+  <div style="bottom: 10px; right: 10px; position: absolute;">
+    <a href="https://signatureforemail.com/?utm_source=wth_free_link&utm_medium=external" target="_blank" rel="noopener">
+      <img src="https://signatureforemail.com/images/logo.png" style="width:180px;" alt="Signature" />
+    </a>
+  </div>
+</body>
+</html>
